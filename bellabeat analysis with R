@@ -1,0 +1,1049 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "cdc7be2f",
+   "metadata": {
+    "papermill": {
+     "duration": 0.005761,
+     "end_time": "2023-07-06T08:09:06.380273",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.374512",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "# Bellabeat - fitbit analysis using R\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bbbeba08",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003977,
+     "end_time": "2023-07-06T08:09:06.388529",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.384552",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "![](https://img.bazzar.hr/dEF84QQ/fn:logotype-01/czM6Ly9kYXRhc3Rv/cmUuYmF6emFyLmhy/L1hZakxBSzJzNm9N/VmtiYWZNdVN2ejlQ/eg)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "108d55d5",
+   "metadata": {
+    "papermill": {
+     "duration": 0.004624,
+     "end_time": "2023-07-06T08:09:06.397440",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.392816",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## Table of contents\n",
+    "\n",
+    "- overview of the case study\n",
+    "- company summary\n",
+    "- business tasks\n",
+    "    \n",
+    "    1.problem statement\n",
+    "    \n",
+    "    2.key stackholder\n",
+    "    \n",
+    "- Data integrity\n",
+    "\n",
+    "- Data manipulation\n",
+    "   \n",
+    "    1.Processing and cleaning steps\n",
+    "    \n",
+    "    2.Datatypes and transformations\n",
+    "\n",
+    "- Analysis and Insights\n",
+    "    \n",
+    "    1.Exploration of the smart device usage data\n",
+    "    \n",
+    "    2.trends and pattern in consumer behavior\n",
+    "\n",
+    "- Recommendations \n",
+    "    \n",
+    "    1.Actionable recommendations based on analysis\n",
+    "    \n",
+    "    2.marketing strategy implications\n",
+    "    \n",
+    "- conclusion \n",
+    "    \n",
+    "    1.summary of key finding and implications \n",
+    "    \n",
+    "    2.future opportunities and next steps\n",
+    "    \n",
+    "    \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "33e3dace",
+   "metadata": {
+    "papermill": {
+     "duration": 0.004227,
+     "end_time": "2023-07-06T08:09:06.405774",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.401547",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## overview of the case study\n",
+    "\n",
+    "Overview of the Case Study:\n",
+    "\n",
+    "The case study revolves around Bellabeat, a high-tech manufacturer of health-focused products for women. As a junior data analyst, you are tasked with analyzing smart device usage data to gain insights into how consumers use non-Bellabeat smart devices. The objective is to apply these insights to one of Bellabeat's products and make high-level recommendations for the company's marketing strategy.\n",
+    "\n",
+    "The case study follows the data analysis process, including asking relevant questions, preparing and processing the data, analyzing the data, sharing insights, and providing actionable recommendations. By the end of the case study, you will develop a portfolio-ready analysis report showcasing your knowledge and skills as a data analyst.\n",
+    "\n",
+    "Throughout the case study, you will encounter key stakeholders such as Urška Sršen (Bellabeat's co-founder and Chief Creative Officer), Sando Mur (Bellabeat's co-founder), the Bellabeat marketing analytics team, and other characters involved in the company's operations.\n",
+    "\n",
+    "The case study is divided into sections that cover various aspects of the data analysis process, including data integrity, data manipulation documentation, analysis, visualizations, and insights, as well as recommendations for Bellabeat's marketing strategy.\n",
+    "\n",
+    "The ultimate goal is to provide valuable insights into smart device usage trends, their relevance to Bellabeat's customers, and how these trends can inform and influence the company's marketing strategies."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "978da44d",
+   "metadata": {
+    "papermill": {
+     "duration": 0.004298,
+     "end_time": "2023-07-06T08:09:06.414216",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.409918",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## company summary\n",
+    "\n",
+    "\n",
+    "Bellabeat is a high-tech manufacturer of health-focused products for women, founded in 2013. Their flagship product is the Bellabeat app, which offers features such as activity tracking, sleep monitoring, stress management, and menstrual cycle tracking. The app connects with Bellabeat's wearable devices, including the versatile Leaf tracker and the Time wellness watch. Bellabeat also offers the Spring water bottle for hydration tracking and a membership program for personalized guidance. With a mission to empower women through technology and data-driven insights, Bellabeat has established itself as a leading brand in the wellness industry.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6f5d7244",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003965,
+     "end_time": "2023-07-06T08:09:06.422255",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.418290",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## Business tasks\n",
+    "\n",
+    "- Analyze smart device usage data: The primary task is to analyze smart device usage data to gain insights into how consumers use non-Bellabeat smart devices. This analysis will provide valuable information on consumer behavior and trends.\n",
+    "\n",
+    "- Apply insights to Bellabeat customers: The goal is to apply the insights gained from the analysis to understand how Bellabeat customers use their smart devices. This will help identify patterns and preferences specific to Bellabeat's target audience.\n",
+    "\n",
+    "- Influence Bellabeat marketing strategy: The insights and trends uncovered from the analysis will be used to inform and influence Bellabeat's marketing strategy. This will involve leveraging the findings to develop targeted marketing campaigns and product enhancements to better cater to customer needs and preferences.\n",
+    "\n",
+    "- Present analysis and recommendations: The final task is to prepare a comprehensive report and presentation summarizing the analysis, key findings, and high-level recommendations. This will involve communicating the insights effectively to the Bellabeat executive team, ensuring they are actionable and can drive informed decision-making."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "96a3bf79",
+   "metadata": {
+    "papermill": {
+     "duration": 0.005336,
+     "end_time": "2023-07-06T08:09:06.431990",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.426654",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "- problem statement\n",
+    "  \n",
+    "  Bellabeat, a high-tech manufacturer of health-focused products for women, aims to become a larger player in the global smart device market. To achieve this, they need to gain insights into how consumers are using smart devices and how these trends can inform their marketing strategy. The challenge is to analyze smart device usage data and identify key trends that can drive business decisions and help Bellabeat reach its growth goals.\n",
+    "  \n",
+    "  \n",
+    "- Key Stakeholders\n",
+    "\n",
+    "\n",
+    "- **Urska Srsen**: Bellabeat’s cofounder and Chief Creative Officer\n",
+    "- **Sando Mur**: Mathematician and Bellabeat’s cofounder; key member of the Bellabeat executive team\n",
+    "- **Bellabeat marketing analytics team**. \n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "22159cf1",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003877,
+     "end_time": "2023-07-06T08:09:06.439833",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.435956",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## Data integrity\n",
+    "\n",
+    "**Data source overview**\n",
+    "\n",
+    "- The data used in this case study is sourced from a distributed survey conducted via Amazon Mechanical Turk. The survey was designed to collect personal tracker data from Fitbit users, specifically those who consented to share their data for research purposes. The dataset includes minute-level output for physical activity, heart rate, and sleep monitoring.\n",
+    "\n",
+    "- The survey was conducted over a specific timeframe between 03.12.2016 and 05.12.2016. During this period, thirty eligible Fitbit users participated in the survey and submitted their personal tracker data. The dataset captures a range of information related to users' daily habits and behaviors, providing valuable insights into their activity levels, heart rate patterns, and sleep quality.\n",
+    "\n",
+    "- It's important to note that the dataset reflects the usage of different types of Fitbit trackers and individual tracking behaviors and preferences. This variation in data output adds richness to the dataset and allows for a comprehensive analysis of users' smart device usage patterns.\n",
+    "\n",
+    "- The dataset was obtained from Kaggle [ Fitbit Fitness Tracker](https://www.kaggle.com/datasets/arashnic/fitbit), a popular platform for sharing and accessing datasets for data science and machine learning. It is important to adhere to the licensing terms and provide proper attribution to the dataset source when using it for analysis or reporting purposes.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "51eb5dfd",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003915,
+     "end_time": "2023-07-06T08:09:06.447670",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.443755",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "**Data Selection**\n",
+    "\n",
+    "- Daily Activity Data: This dataset provides information about users' daily physical activity, which can help understand their activity patterns and behaviors.\n",
+    "\n",
+    "- Daily Calories Data: This dataset includes data on users' daily calorie consumption, which can provide insights into their dietary habits and calorie intake.\n",
+    "\n",
+    "- Daily Intensity Data: This dataset contains information about the intensity levels of users' daily activities, which can be valuable for understanding their activity preferences and engagement.\n",
+    "\n",
+    "- Daily Steps Data: This dataset tracks users' daily step counts, offering insights into their overall physical activity levels and trends.\n",
+    "\n",
+    "- Heart Rate Data: This dataset records users' heart rate data, which can provide information about their cardiovascular health and exercise intensity.\n",
+    "\n",
+    "- Sleep Data: This dataset captures users' sleep patterns and duration, which can be analyzed to understand their sleep quality and habits.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7da4f399",
+   "metadata": {
+    "papermill": {
+     "duration": 0.003838,
+     "end_time": "2023-07-06T08:09:06.455397",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.451559",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "b88214f5",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:06.467809Z",
+     "iopub.status.busy": "2023-07-06T08:09:06.465744Z",
+     "iopub.status.idle": "2023-07-06T08:09:07.704818Z",
+     "shell.execute_reply": "2023-07-06T08:09:07.702747Z"
+    },
+    "papermill": {
+     "duration": 1.247889,
+     "end_time": "2023-07-06T08:09:07.707430",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:06.459541",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "── \u001b[1mAttaching core tidyverse packages\u001b[22m ──────────────────────── tidyverse 2.0.0 ──\n",
+      "\u001b[32m✔\u001b[39m \u001b[34mdplyr    \u001b[39m 1.1.2     \u001b[32m✔\u001b[39m \u001b[34mreadr    \u001b[39m 2.1.4\n",
+      "\u001b[32m✔\u001b[39m \u001b[34mforcats  \u001b[39m 1.0.0     \u001b[32m✔\u001b[39m \u001b[34mstringr  \u001b[39m 1.5.0\n",
+      "\u001b[32m✔\u001b[39m \u001b[34mggplot2  \u001b[39m 3.4.2     \u001b[32m✔\u001b[39m \u001b[34mtibble   \u001b[39m 3.2.1\n",
+      "\u001b[32m✔\u001b[39m \u001b[34mlubridate\u001b[39m 1.9.2     \u001b[32m✔\u001b[39m \u001b[34mtidyr    \u001b[39m 1.3.0\n",
+      "\u001b[32m✔\u001b[39m \u001b[34mpurrr    \u001b[39m 1.0.1     \n",
+      "── \u001b[1mConflicts\u001b[22m ────────────────────────────────────────── tidyverse_conflicts() ──\n",
+      "\u001b[31m✖\u001b[39m \u001b[34mdplyr\u001b[39m::\u001b[32mfilter()\u001b[39m masks \u001b[34mstats\u001b[39m::filter()\n",
+      "\u001b[31m✖\u001b[39m \u001b[34mdplyr\u001b[39m::\u001b[32mlag()\u001b[39m    masks \u001b[34mstats\u001b[39m::lag()\n",
+      "\u001b[36mℹ\u001b[39m Use the conflicted package (\u001b[3m\u001b[34m<http://conflicted.r-lib.org/>\u001b[39m\u001b[23m) to force all conflicts to become errors\n",
+      "\n",
+      "Attaching package: ‘janitor’\n",
+      "\n",
+      "\n",
+      "The following objects are masked from ‘package:stats’:\n",
+      "\n",
+      "    chisq.test, fisher.test\n",
+      "\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "# loading packages\n",
+    "library(\"tidyverse\")\n",
+    "library(\"lubridate\")\n",
+    "library(\"janitor\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "feede8cb",
+   "metadata": {
+    "_kg_hide-input": false,
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:07.748572Z",
+     "iopub.status.busy": "2023-07-06T08:09:07.718430Z",
+     "iopub.status.idle": "2023-07-06T08:09:11.330509Z",
+     "shell.execute_reply": "2023-07-06T08:09:11.328500Z"
+    },
+    "papermill": {
+     "duration": 3.62129,
+     "end_time": "2023-07-06T08:09:11.333424",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:07.712134",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "\u001b[1mRows: \u001b[22m\u001b[34m940\u001b[39m \u001b[1mColumns: \u001b[22m\u001b[34m3\u001b[39m\n",
+      "\u001b[36m──\u001b[39m \u001b[1mColumn specification\u001b[22m \u001b[36m────────────────────────────────────────────────────────\u001b[39m\n",
+      "\u001b[1mDelimiter:\u001b[22m \",\"\n",
+      "\u001b[31mchr\u001b[39m (1): ActivityDay\n",
+      "\u001b[32mdbl\u001b[39m (2): Id, Calories\n",
+      "\n",
+      "\u001b[36mℹ\u001b[39m Use `spec()` to retrieve the full column specification for this data.\n",
+      "\u001b[36mℹ\u001b[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.\n",
+      "\u001b[1mRows: \u001b[22m\u001b[34m940\u001b[39m \u001b[1mColumns: \u001b[22m\u001b[34m3\u001b[39m\n",
+      "\u001b[36m──\u001b[39m \u001b[1mColumn specification\u001b[22m \u001b[36m────────────────────────────────────────────────────────\u001b[39m\n",
+      "\u001b[1mDelimiter:\u001b[22m \",\"\n",
+      "\u001b[31mchr\u001b[39m (1): ActivityDay\n",
+      "\u001b[32mdbl\u001b[39m (2): Id, StepTotal\n",
+      "\n",
+      "\u001b[36mℹ\u001b[39m Use `spec()` to retrieve the full column specification for this data.\n",
+      "\u001b[36mℹ\u001b[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.\n",
+      "\u001b[1mRows: \u001b[22m\u001b[34m2483658\u001b[39m \u001b[1mColumns: \u001b[22m\u001b[34m3\u001b[39m\n",
+      "\u001b[36m──\u001b[39m \u001b[1mColumn specification\u001b[22m \u001b[36m────────────────────────────────────────────────────────\u001b[39m\n",
+      "\u001b[1mDelimiter:\u001b[22m \",\"\n",
+      "\u001b[31mchr\u001b[39m (1): Time\n",
+      "\u001b[32mdbl\u001b[39m (2): Id, Value\n",
+      "\n",
+      "\u001b[36mℹ\u001b[39m Use `spec()` to retrieve the full column specification for this data.\n",
+      "\u001b[36mℹ\u001b[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.\n",
+      "\u001b[1mRows: \u001b[22m\u001b[34m413\u001b[39m \u001b[1mColumns: \u001b[22m\u001b[34m5\u001b[39m\n",
+      "\u001b[36m──\u001b[39m \u001b[1mColumn specification\u001b[22m \u001b[36m────────────────────────────────────────────────────────\u001b[39m\n",
+      "\u001b[1mDelimiter:\u001b[22m \",\"\n",
+      "\u001b[31mchr\u001b[39m (1): SleepDay\n",
+      "\u001b[32mdbl\u001b[39m (4): Id, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed\n",
+      "\n",
+      "\u001b[36mℹ\u001b[39m Use `spec()` to retrieve the full column specification for this data.\n",
+      "\u001b[36mℹ\u001b[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# importing data\n",
+    "\n",
+    "activity <- read.csv(\"/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv\")\n",
+    "calories <- read_csv(\"/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv\")\n",
+    "steps <- read_csv(\"/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv\")\n",
+    "heart_rate <- read_csv(\"/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/heartrate_seconds_merged.csv\")\n",
+    "sleep <- read_csv(\"/kaggle/input/fitbit/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "78a18fca",
+   "metadata": {
+    "papermill": {
+     "duration": 0.005352,
+     "end_time": "2023-07-06T08:09:11.344167",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:11.338815",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## Data manipulation\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "e56b5082",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:11.358681Z",
+     "iopub.status.busy": "2023-07-06T08:09:11.356987Z",
+     "iopub.status.idle": "2023-07-06T08:09:11.955919Z",
+     "shell.execute_reply": "2023-07-06T08:09:11.954078Z"
+    },
+    "papermill": {
+     "duration": 0.608812,
+     "end_time": "2023-07-06T08:09:11.958488",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:11.349676",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "checking for missing values\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# checking for missing values\n",
+    "message(\"checking for missing values\")\n",
+    "sum(is.na(activity))\n",
+    "sum(is.na(heart_rate))\n",
+    "sum(is.na(sleep))\n",
+    "sum(is.na(steps))\n",
+    "sum(is.na(calories))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "de7fb838",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:11.974536Z",
+     "iopub.status.busy": "2023-07-06T08:09:11.972960Z",
+     "iopub.status.idle": "2023-07-06T08:09:12.015060Z",
+     "shell.execute_reply": "2023-07-06T08:09:12.013423Z"
+    },
+    "papermill": {
+     "duration": 0.052521,
+     "end_time": "2023-07-06T08:09:12.017378",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:11.964857",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "checking for null values\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# checking for null values\n",
+    "message(\"checking for null values\")\n",
+    "\n",
+    "sum(is.null(activity))\n",
+    "sum(is.null(heart_rate))\n",
+    "sum(is.null(sleep))\n",
+    "sum(is.null(steps))\n",
+    "sum(is.null(calories))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "53f801de",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:12.034182Z",
+     "iopub.status.busy": "2023-07-06T08:09:12.032682Z",
+     "iopub.status.idle": "2023-07-06T08:09:20.610590Z",
+     "shell.execute_reply": "2023-07-06T08:09:20.608957Z"
+    },
+    "papermill": {
+     "duration": 8.5889,
+     "end_time": "2023-07-06T08:09:20.612978",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:12.024078",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Checking for duplicated rows:\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "3"
+      ],
+      "text/latex": [
+       "3"
+      ],
+      "text/markdown": [
+       "3"
+      ],
+      "text/plain": [
+       "[1] 3"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# checking for duplicate values\n",
+    "message(\"Checking for duplicated rows:\")\n",
+    "sum(duplicated(activity))\n",
+    "sum(duplicated(heart_rate))\n",
+    "sum(duplicated(steps))\n",
+    "sum(duplicated(sleep))\n",
+    "sum(duplicated(calories))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "6a0564b6",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:20.631422Z",
+     "iopub.status.busy": "2023-07-06T08:09:20.629956Z",
+     "iopub.status.idle": "2023-07-06T08:09:20.759337Z",
+     "shell.execute_reply": "2023-07-06T08:09:20.757291Z"
+    },
+    "papermill": {
+     "duration": 0.14178,
+     "end_time": "2023-07-06T08:09:20.762443",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:20.620663",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Checking for number of distinct ID:\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "33"
+      ],
+      "text/latex": [
+       "33"
+      ],
+      "text/markdown": [
+       "33"
+      ],
+      "text/plain": [
+       "[1] 33"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "14"
+      ],
+      "text/latex": [
+       "14"
+      ],
+      "text/markdown": [
+       "14"
+      ],
+      "text/plain": [
+       "[1] 14"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "33"
+      ],
+      "text/latex": [
+       "33"
+      ],
+      "text/markdown": [
+       "33"
+      ],
+      "text/plain": [
+       "[1] 33"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "24"
+      ],
+      "text/latex": [
+       "24"
+      ],
+      "text/markdown": [
+       "24"
+      ],
+      "text/plain": [
+       "[1] 24"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "text/html": [
+       "33"
+      ],
+      "text/latex": [
+       "33"
+      ],
+      "text/markdown": [
+       "33"
+      ],
+      "text/plain": [
+       "[1] 33"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# checking for distinct values\n",
+    "\n",
+    "message(\"Checking for number of distinct ID:\")\n",
+    "n_distinct(activity$Id)\n",
+    "n_distinct(heart_rate$Id)\n",
+    "n_distinct(steps$Id)\n",
+    "n_distinct(sleep$Id)\n",
+    "n_distinct(calories$Id)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d2c051c5",
+   "metadata": {
+    "papermill": {
+     "duration": 0.008191,
+     "end_time": "2023-07-06T08:09:20.778700",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:20.770509",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## data cleaning \n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "0481ab32",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-07-06T08:09:20.798391Z",
+     "iopub.status.busy": "2023-07-06T08:09:20.796868Z",
+     "iopub.status.idle": "2023-07-06T08:09:20.831976Z",
+     "shell.execute_reply": "2023-07-06T08:09:20.830115Z"
+    },
+    "papermill": {
+     "duration": 0.04829,
+     "end_time": "2023-07-06T08:09:20.835053",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:20.786763",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "0"
+      ],
+      "text/latex": [
+       "0"
+      ],
+      "text/markdown": [
+       "0"
+      ],
+      "text/plain": [
+       "[1] 0"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# deleting  duplicate rows from sleep \n",
+    "\n",
+    "sleep <- sleep %>% filter(!duplicated(sleep))\n",
+    "\n",
+    "sum(duplicated(sleep))\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d893ef27",
+   "metadata": {
+    "papermill": {
+     "duration": 0.008851,
+     "end_time": "2023-07-06T08:09:20.852098",
+     "exception": false,
+     "start_time": "2023-07-06T08:09:20.843247",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "source": [
+    "## Datatypes and transformation\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "R",
+   "language": "R",
+   "name": "ir"
+  },
+  "language_info": {
+   "codemirror_mode": "r",
+   "file_extension": ".r",
+   "mimetype": "text/x-r-source",
+   "name": "R",
+   "pygments_lexer": "r",
+   "version": "4.0.5"
+  },
+  "papermill": {
+   "default_parameters": {},
+   "duration": 18.14024,
+   "end_time": "2023-07-06T08:09:20.983319",
+   "environment_variables": {},
+   "exception": null,
+   "input_path": "__notebook__.ipynb",
+   "output_path": "__notebook__.ipynb",
+   "parameters": {},
+   "start_time": "2023-07-06T08:09:02.843079",
+   "version": "2.4.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
