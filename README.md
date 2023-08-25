@@ -23,7 +23,6 @@ Data Analyst Bio:
 
 Feel free to adapt these versions to better reflect your personality and experiences. These bios should provide a glimpse into your passions and expertise as a Python Developer and a Data Analyst.
 
-- 📫 How to reach me: &nbsp; [![Linkedin Badge](https://img.shields.io/badge/-kakbar-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/kakbar)
 
 ---
 
